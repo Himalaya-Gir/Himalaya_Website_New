@@ -22,16 +22,27 @@ const otherLang = lang === 'fr' ? 'en' : 'fr';
 const otherLangLabel = lang === 'fr' ? 'EN' : 'FR';
 
 // Map current path to other language
-// Ensure we always have a proper path starting with /
-let switchPath = currentPath || '/';
-if (lang === 'fr') {
-  // Going from FR to EN: remove /fr prefix
-  switchPath = switchPath.replace(/^\/fr/, '') || '/';
-} else {
-  // Going from EN to FR: add /fr prefix
-  switchPath = '/fr' + switchPath;
+// Get just the page part without base or language prefix
+let pagePath = currentPath || '/';
+// Remove base path if present
+if (pagePath.startsWith(base)) {
+  pagePath = pagePath.slice(base.length - 1); // Keep the leading /
 }
-const switchUrl = switchPath;
+// Remove /fr prefix if present
+pagePath = pagePath.replace(/^\/fr\/?/, '/');
+if (pagePath === '') pagePath = '/';
+
+// Build the switch URL with base path
+let switchUrl: string;
+if (lang === 'fr') {
+  // Going from FR to EN: base + page path
+  switchUrl = base + pagePath.slice(1); // Remove leading / since base has trailing /
+} else {
+  // Going from EN to FR: base + fr/ + page path
+  switchUrl = base + 'fr' + pagePath;
+}
+// Clean up double slashes
+switchUrl = switchUrl.replace(/\/+/g, '/').replace(/\/$/, '') || base;
 ---
 
 <nav class="fixed top-0 left-0 right-0 z-50 bg-[#003049] shadow-lg">
