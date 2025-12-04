@@ -1,0 +1,21 @@
+---
+import { getLanguageFromUrl } from '../i18n/translations';
+
+const currentLang = getLanguageFromUrl(Astro.url);
+const otherLang = currentLang === 'en' ? 'fr' : 'en';
+const otherLangLabel = currentLang === 'en' ? 'FR' : 'EN';
+
+// Get current path without language prefix
+const currentPath = Astro.url.pathname.replace(/^\/(fr|en)/, '');
+const switchUrl = otherLang === 'fr' ? `/fr${currentPath}` : currentPath || '/';
+---
+
+<a
+  href={switchUrl}
+  class="fixed top-6 right-6 z-50 px-5 py-2.5 bg-[#003049] text-[#FFF9ED] rounded-full hover:bg-[#780000] transition-all duration-300 font-bold shadow-lg hover:shadow-xl hover:-translate-y-0.5 flex items-center gap-2 text-sm tracking-wide border border-[#FFF9ED]/10 backdrop-blur-sm"
+  aria-label={`Switch to ${otherLang === 'fr' ? 'French' : 'English'}`}
+>
+  <span class="opacity-70 font-medium">{currentLang === 'en' ? 'EN' : 'FR'}</span>
+  <span class="w-px h-3 bg-[#FFF9ED]/30"></span>
+  <span>{otherLangLabel}</span>
+</a>
