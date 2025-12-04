@@ -5,25 +5,35 @@ const currentLang = getLanguageFromUrl(Astro.url);
 const otherLang = currentLang === 'en' ? 'fr' : 'en';
 const otherLangLabel = currentLang === 'en' ? 'FR' : 'EN';
 
-// Get base URL (e.g., "/Himalaya_Website_New/" or "/")
-const baseUrl = import.meta.env.BASE_URL;
+// Get the current page path from the URL
+const pathname = Astro.url.pathname;
 
-// Get the page path after removing base and language prefix
-// e.g., "/Himalaya_Website_New/fr/about" -> "/about"
-let pagePath = Astro.url.pathname;
-if (baseUrl !== '/') {
-  pagePath = pagePath.replace(baseUrl.replace(/\/$/, ''), '');
+// Extract just the page name (e.g., "/about", "/journey", "/")
+// Remove any base path and language prefix
+const pathParts = pathname.split('/').filter(Boolean);
+
+// Remove base path segment if present (e.g., "Himalaya_Website_New")
+let cleanParts = [...pathParts];
+if (cleanParts[0] === 'Himalaya_Website_New') {
+  cleanParts.shift();
 }
-pagePath = pagePath.replace(/^\/(fr|en)/, '') || '/';
 
-// Build the switch URL
+// Remove language prefix if present
+if (cleanParts[0] === 'fr' || cleanParts[0] === 'en') {
+  cleanParts.shift();
+}
+
+// The remaining path is the page path
+const pagePath = cleanParts.length > 0 ? '/' + cleanParts.join('/') : '';
+
+// Build switch URL using BASE_URL
+const base = import.meta.env.BASE_URL;
 let switchUrl: string;
 if (otherLang === 'fr') {
-  // Going to French: add /fr prefix
-  switchUrl = baseUrl + 'fr' + (pagePath === '/' ? '' : pagePath);
+  switchUrl = `${base}fr${pagePath}`;
 } else {
-  // Going to English: no prefix needed
-  switchUrl = baseUrl.replace(/\/$/, '') + pagePath;
+  // For English, no /en prefix needed
+  switchUrl = pagePath ? `${base.replace(/\/$/, '')}${pagePath}` : base;
 }
 ---
 
