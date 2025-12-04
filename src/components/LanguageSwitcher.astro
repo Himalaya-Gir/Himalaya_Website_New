@@ -1,48 +1,53 @@
 ---
-import { getLanguageFromUrl } from '../i18n/translations';
-
-const currentLang = getLanguageFromUrl(Astro.url);
-const otherLang = currentLang === 'en' ? 'fr' : 'en';
-const otherLangLabel = currentLang === 'en' ? 'FR' : 'EN';
-
-// Get the current page path from the URL
-const pathname = Astro.url.pathname;
-
-// Extract just the page name (e.g., "/about", "/journey", "/")
-// Remove any base path and language prefix
-const pathParts = pathname.split('/').filter(Boolean);
-
-// Remove base path segment if present (e.g., "Himalaya_Website_New")
-let cleanParts = [...pathParts];
-if (cleanParts[0] === 'Himalaya_Website_New') {
-  cleanParts.shift();
-}
-
-// Remove language prefix if present
-if (cleanParts[0] === 'fr' || cleanParts[0] === 'en') {
-  cleanParts.shift();
-}
-
-// The remaining path is the page path
-const pagePath = cleanParts.length > 0 ? '/' + cleanParts.join('/') : '';
-
-// Build switch URL using BASE_URL
-const base = import.meta.env.BASE_URL;
-let switchUrl: string;
-if (otherLang === 'fr') {
-  switchUrl = `${base}fr${pagePath}`;
-} else {
-  // For English, no /en prefix needed
-  switchUrl = pagePath ? `${base.replace(/\/$/, '')}${pagePath}` : base;
-}
+// Language switcher - uses client-side JS to handle base path correctly
+const baseUrl = import.meta.env.BASE_URL;
 ---
 
 <a
-  href={switchUrl}
+  id="lang-switcher"
+  href="#"
   class="fixed top-6 right-6 z-50 px-5 py-2.5 bg-[#003049] text-[#FFF9ED] rounded-full hover:bg-[#780000] transition-all duration-300 font-bold shadow-lg hover:shadow-xl hover:-translate-y-0.5 flex items-center gap-2 text-sm tracking-wide border border-[#FFF9ED]/10 backdrop-blur-sm"
-  aria-label={`Switch to ${otherLang === 'fr' ? 'French' : 'English'}`}
+  data-base={baseUrl}
 >
-  <span class="opacity-70 font-medium">{currentLang === 'en' ? 'EN' : 'FR'}</span>
+  <span id="current-lang" class="opacity-70 font-medium">EN</span>
   <span class="w-px h-3 bg-[#FFF9ED]/30"></span>
-  <span>{otherLangLabel}</span>
+  <span id="target-lang">FR</span>
 </a>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const switcher = document.getElementById('lang-switcher') as HTMLAnchorElement;
+    const currentLangSpan = document.getElementById('current-lang');
+    const targetLangSpan = document.getElementById('target-lang');
+
+    if (!switcher || !currentLangSpan || !targetLangSpan) return;
+
+    const base = switcher.dataset.base || '/';
+    const pathname = window.location.pathname;
+
+    // Check if we're on French version
+    const isFrench = pathname.includes('/fr/') || pathname.endsWith('/fr');
+
+    // Update display
+    currentLangSpan.textContent = isFrench ? 'FR' : 'EN';
+    targetLangSpan.textContent = isFrench ? 'EN' : 'FR';
+    switcher.setAttribute('aria-label', `Switch to ${isFrench ? 'English' : 'French'}`);
+
+    // Build the switch URL
+    let switchUrl: string;
+
+    if (isFrench) {
+      // Going to English: remove /fr from path
+      switchUrl = pathname.replace('/fr/', '/').replace('/fr', '');
+      if (switchUrl === base.replace(/\/$/, '')) {
+        switchUrl = base;
+      }
+    } else {
+      // Going to French: add /fr after base
+      const pathAfterBase = pathname.replace(base.replace(/\/$/, ''), '');
+      switchUrl = base + 'fr' + (pathAfterBase || '');
+    }
+
+    switcher.href = switchUrl;
+  });
+</script>
