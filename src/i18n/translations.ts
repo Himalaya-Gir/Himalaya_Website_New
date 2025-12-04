@@ -75,7 +75,7 @@ export const translations = {
     'process.subtitle': 'Building a robust framework for understanding trust and risk',
     'process.step1.title': 'Down the Rabbit Hole',
     'process.step1.period': 'Phase 1',
-    'process.step1.desc': '69 papers. Contradictory results everywhere—some say trust exceeds risk, others the opposite. Then I saw it: different stakes, different probabilities, mismatched uncertainty. What if the contradiction wasn\'t theoretical, but methodological?',
+    'process.step1.desc': 'Dozens of papers. Contradictory results everywhere—some say trust exceeds risk, others the opposite. Then I saw it: different stakes, different probabilities, mismatched uncertainty. What if the contradiction wasn\'t theoretical, but methodological?',
     'process.step2.title': 'The Hypothesis',
     'process.step2.period': 'Phase 2',
     'process.step2.desc': 'Same bet, different source. If Prospect Theory explains gambling, can it explain trust?',
@@ -118,7 +118,7 @@ export const translations = {
     'home.explore.process.desc': 'From literature review to experiment design. See how we got here and where we\'re going.',
     'home.explore.process.cta': 'View Journey',
     'home.explore.literature.title': 'The Literature',
-    'home.explore.literature.desc': '69 papers that shaped this research. Browse by category, search by topic.',
+    'home.explore.literature.desc': 'The papers that shaped this research. Browse by category, search by topic.',
     'home.explore.literature.cta': 'Read Papers',
 
     // Explore Page
@@ -187,7 +187,7 @@ export const translations = {
     'references.badge': 'Research Library',
     'references.title': 'Deconvolving',
     'references.titleHighlight': 'Trust & Risk',
-    'references.intro': 'Every research project starts with a question. This library contains the 69 foundational papers that shaped our hypothesis: <em class="italic font-serif text-[#003049]">Does the math of gambling explain the psychology of trust?</em>',
+    'references.intro': 'Every research project starts with a question. This library contains the foundational papers that shaped our hypothesis: <em class="italic font-serif text-[#003049]">Does the math of gambling explain the psychology of trust?</em>',
     'references.featuredLabel': 'Featured Paper',
     'references.featuredTitle': 'Prospect Theory: An Analysis of Decision under Risk',
     'references.featuredQuote': '"Decision making under risk can be viewed as a choice between prospects or gambles."',
@@ -283,7 +283,7 @@ export const translations = {
     'process.subtitle': 'Construction d\'un cadre robuste pour comprendre la confiance et le risque',
     'process.step1.title': 'Dans le Terrier du Lapin',
     'process.step1.period': 'Phase 1',
-    'process.step1.desc': '69 articles. Résultats contradictoires partout—certains disent que la confiance dépasse le risque, d\'autres l\'inverse. Puis j\'ai vu : enjeux différents, probabilités différentes, incertitude mal appariée. Et si la contradiction n\'était pas théorique, mais méthodologique?',
+    'process.step1.desc': 'Des dizaines d\'articles. Résultats contradictoires partout—certains disent que la confiance dépasse le risque, d\'autres l\'inverse. Puis j\'ai vu : enjeux différents, probabilités différentes, incertitude mal appariée. Et si la contradiction n\'était pas théorique, mais méthodologique?',
     'process.step2.title': 'Design Expérimental',
     'process.step2.period': 'Phase 2',
     'process.step2.desc': 'Conception du Jeu de Confiance et du Jeu de Risque avec distributions de probabilités appariées. Développement du Jeu de Confiance Inversé comme contrôle méthodologique.',
@@ -326,7 +326,7 @@ export const translations = {
     'home.explore.process.desc': 'De la revue de littérature à la conception expérimentale. Voyez comment nous sommes arrivés ici et où nous allons.',
     'home.explore.process.cta': 'Voir le Parcours',
     'home.explore.literature.title': 'La Littérature',
-    'home.explore.literature.desc': '69 articles qui ont façonné cette recherche. Parcourez par catégorie, recherchez par sujet.',
+    'home.explore.literature.desc': 'Les articles qui ont façonné cette recherche. Parcourez par catégorie, recherchez par sujet.',
     'home.explore.literature.cta': 'Lire les Articles',
 
     // Explore Page
@@ -395,7 +395,7 @@ export const translations = {
     'references.badge': 'Bibliothèque de Recherche',
     'references.title': 'Déconvolution de la',
     'references.titleHighlight': 'Confiance & du Risque',
-    'references.intro': 'Chaque projet de recherche commence par une question. Cette bibliothèque contient les 69 articles fondamentaux qui ont façonné notre hypothèse : <em class="italic font-serif text-[#003049]">Les mathématiques du jeu peuvent-elles expliquer la psychologie de la confiance ?</em>',
+    'references.intro': 'Chaque projet de recherche commence par une question. Cette bibliothèque contient les articles fondamentaux qui ont façonné notre hypothèse : <em class="italic font-serif text-[#003049]">Les mathématiques du jeu peuvent-elles expliquer la psychologie de la confiance ?</em>',
     'references.featuredLabel': 'Article Phare',
     'references.featuredTitle': 'Théorie des Perspectives : Une Analyse de la Décision sous Risque',
     'references.featuredQuote': '« La prise de décision sous risque peut être vue comme un choix entre des perspectives ou des paris. »',
